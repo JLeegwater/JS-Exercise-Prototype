@@ -73,10 +73,18 @@ Person.prototype.toString = function() {
           + The `drive` method should return a string "I ran out of fuel at x miles!" x being `odometer`.
   */
   
- function Car() {
-    
+ function Car(model,milesPerGallon){
+    this.model = model;
+    this.milesPerGallon = milesPerGallon;
+    this.tank = 0;
+    this.odometer = 0;
   }
   
+  Car.prototype.fill = function(gallons)
+  {
+    this.tank +=gallons;
+  }
+
   
   /*
     TASK 3
@@ -85,18 +93,23 @@ Person.prototype.toString = function() {
       - Besides the methods on Person.prototype, babies have the ability to `.play()`:
           + Should return a string "Playing with x", x being the favorite toy.
   */
- function Baby() {
-   
+ function Baby(name,age,favoriteToy){
+   Person.call(this,name,age);
+   this.favoriteToy = favoriteToy;
   }
- 
+  Baby.prototype = Object.create(Person.prototype);
+
+  Baby.prototype.play = function() {
+   return `Playing with ${this.favoriteToy}`;
+ }
   
   /* 
     TASK 4
     In your own words explain the four principles for the "this" keyword below:
-    1. 
-    2. 
-    3. 
-    4. 
+    1. when you call it in the global scope, it returns the whole window data
+    2. when a function is called, the object that is left of the function call is that "this" is.
+    3. when a constructor is used, this is what the function is creating
+    4.when we use call or apply, we tell the function what "this" is. 
   */
   
   
